@@ -2,7 +2,6 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Layout, { siteTitle } from '../components/layout'
 import Date from '../components/date'
-// import utilStyles from '../styles/utils.module.css'
 
 import { getSortedPostsData } from '../lib/posts'
 
@@ -33,22 +32,31 @@ export default function Home({ allPostsData }) {
         <title>{siteTitle}</title>
       </Head>
 
-      <section>
-        <p className="flex flex-col justify-center items-center w-full">
-          Product Designer. <span className="flex cursor-pointer text-blue-600 hover:text-blue-500" onClick={() => { navigator.clipboard.writeText("brinkhuis.daan@gmail.com") }}>brinkhuis.daan@gmail.com<ClipboardIcon /></span>
+      <section className="flex flex-col w-1/2 justify-center text-center items-center">
+        <p>
+          Digital product designer currently designing a variety of B2B products. I also like to dream around with coding, project management and product strategies.
+        </p>
+        <p
+          className="flex p-2 my-2 justify-center cursor-pointer hover:bg-blue-500 text-blue-500 hover:text-white"
+          onClick={() => { navigator.clipboard.writeText("brinkhuis.daan@gmail.com") }}>
+          <ClipboardIcon />
+          Copy my e-mail address
         </p>
       </section>
 
       <section>
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col gap-4">
           {allPostsData.map(({ id, date, title }) => (
-            <li className="flex flex-col items-center text-blue-600" key={id}>
+            <li className="flex flex-col" key={id}>
               <Link href={`/posts/${id}`}>
-                <a>{title}</a>
+                <div className="group py-4 px-8 bg-white hover:bg-blue-500 cursor-pointer">
+                  <small className="text-gray-400 group-hover:text-blue-200 font-medium">
+                    <Date dateString={date} />
+                  </small>
+
+                  <h2 className="text-blue-500 group-hover:text-white">{title}</h2>
+                </div>
               </Link>
-              <small className="text-gray-500 font-medium">
-                <Date dateString={date} />
-              </small>
             </li>
           ))}
         </ul>
