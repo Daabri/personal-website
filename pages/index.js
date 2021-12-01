@@ -32,24 +32,25 @@ export default function Home({ allPostsData }) {
         <title>{siteTitle}</title>
       </Head>
 
-      <section className="flex flex-col w-1/2 justify-center text-center items-center">
-        <p>
-          Digital product designer currently designing a variety of B2B products. I also like to dream around with coding, project management and product strategies.
-        </p>
-        <p
-          className="flex p-2 my-2 justify-center cursor-pointer hover:bg-blue-500 text-blue-500 hover:text-white"
-          onClick={() => { navigator.clipboard.writeText("brinkhuis.daan@gmail.com") }}>
-          <ClipboardIcon />
-          Copy my e-mail address
+      <section className="col-span-6 py-8 px-2">
+        <p className="text-center justify-center">
+          Digital product designer currently designing a variety of B2B products. I also like to horse around with coding, project management and product strategies.
+          <span
+            className="flex justify-center cursor-pointer hover:bg-blue-500 text-blue-500 hover:text-white"
+            onClick={() => { navigator.clipboard.writeText("brinkhuis.daan@gmail.com") }}>
+            <ClipboardIcon />
+            Copy my e-mail address
+          </span>
         </p>
       </section>
 
-      <section>
-        <ul className="flex flex-col gap-4">
+      {/* Posts */}
+      <section className="flex flex-col items-stretch">
+        <ul>
           {allPostsData.map(({ id, date, title }) => (
             <li className="flex flex-col" key={id}>
               <Link href={`/posts/${id}`}>
-                <div className="group py-4 px-8 bg-white hover:bg-blue-500 cursor-pointer">
+                <div className="group p-4 bg-white hover:bg-blue-500 cursor-pointer">
                   <small className="text-gray-400 group-hover:text-blue-200 font-medium">
                     <Date dateString={date} />
                   </small>

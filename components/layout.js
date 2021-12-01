@@ -6,9 +6,9 @@ export const siteTitle = 'Daan Brinkhuis'
 
 export default function Layout({ children, home }) {
 	return (
-		<div className="my-8 w-full flex flex-col gap-8 items-center">
+		<div className="my-8 w-full flex flex-col items-center">
 			{/* Header */}
-			<div className="w-1/2">
+			<div className="w-full grid grid-cols-8">
 				<Head>
 					<link
 						href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
@@ -20,32 +20,34 @@ export default function Layout({ children, home }) {
 					<meta name="og:title" content={siteTitle} />
 					<meta name="twitter:card" content="summary_large_image" />
 				</Head>
-				<header className="flex flex-col items-center">
+				<header className="col-span-8 flex flex-col items-center gap-4">
 					<Link href="/">
 						<a>
 							<img src="/images/profile.jpg" className="w-32 h-32 rounded-full" alt={name} />
 						</a>
 					</Link>
-					<h2>
+					<h1>
 						<Link href="/">
 							<a>{name}</a>
 						</Link>
-					</h2>
+					</h1>
 				</header>
 			</div>
 
 			{/* Content */}
-			<div className="w-1/2">
-				{!home && (
-					<Link href="/">
-						<div className="my-4 py-2 px-4 w-max hover:bg-blue-500 text-blue-500 hover:text-white cursor-pointer">
-							<a>← Back to home</a>
-						</div>
-					</Link>
-				)}
-
-				<main className="flex flex-col gap-8 items-center">{children}</main>
+			<div className="w-full grid grid-cols-8">
+				<main className="col-span-8 sm:col-start-2 sm:col-span-6">
+					{!home && (
+						<Link href="/">
+							<div className="my-4 py-2 px-4 w-max hover:bg-blue-500 text-blue-500 hover:text-white cursor-pointer">
+								<a>← Back to home</a>
+							</div>
+						</Link>
+					)}
+					{children}
+				</main>
 			</div>
+
 		</div>
 	)
 }

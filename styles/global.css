@@ -15,4 +15,7 @@
 	h2 {
 		@apply text-2xl font-quicksand font-medium;
 	}
+	article section div h2 {
+		@apply mt-8 capitalize
+	}
 }
