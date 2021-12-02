@@ -15,7 +15,21 @@
 	h2 {
 		@apply text-2xl font-quicksand font-medium;
 	}
+	h3 {
+		@apply text-lg font-quicksand font-medium;
+	}
+	
+	/* Articles */
 	article section div h2 {
 		@apply mt-8 capitalize
+	}
+	article section div h3 {
+		@apply mt-4 capitalize
+	}	
+	article section div ul {
+		@apply list-disc list-inside
+	}
+	article section div img {
+		@apply my-4 w-full
 	}
 }

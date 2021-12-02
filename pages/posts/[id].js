@@ -29,12 +29,12 @@ export default function Post({ postData }) {
 				<title>{postData.title}</title>
 			</Head>
 			<article className="bg-white">
-				<Image
+				{/* <Image
 					src={postData.image}
 					width={3200}
 					height={2400}
 					alt={postData.imageAltText}
-				/>
+				/> */}
 				<section className="p-8">
 					<Date className="text-blue-400" dateString={postData.date} />
 					<h1 className="mb-8 text-blue-500">{postData.title}</h1>
