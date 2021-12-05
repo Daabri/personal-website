@@ -1,6 +1,6 @@
 ---
-title: 'Building My Own Personal Website'
-date: '2021-11-01'
+title: 'Case study: Improving the shift planning process for Caro'
+date: '2022-01-01'
 ---
 
-I've always wanted my own personal website, complete with stories and products I experienced. And now I'm starting one!
+This Case study is a work in progress.
