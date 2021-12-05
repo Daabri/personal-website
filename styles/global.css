@@ -10,7 +10,7 @@
 		@apply bg-gray-100;
 	}
 	h1 {
-		@apply text-4xl font-quicksand font-medium;
+		@apply text-4xl leading-snug font-quicksand font-medium;
 	}
 	h2 {
 		@apply text-2xl font-quicksand font-medium;
@@ -20,16 +20,22 @@
 	}
 	
 	/* Articles */
+	article section div {
+		@apply w-full sm:w-1/2 text-gray-700
+	}	
 	article section div h2 {
-		@apply mt-8 capitalize
+		@apply mt-4 text-blue-500 border-b border-blue-500
 	}
 	article section div h3 {
-		@apply mt-4 capitalize
-	}	
+		@apply mt-4 text-blue-500 border-b border-blue-500
+	}
+	article section div strong {
+		@apply bg-pink-50 font-normal text-pink-900
+	}
 	article section div ul {
-		@apply list-disc list-inside
+		@apply my-2 list-disc list-inside
 	}
 	article section div img {
-		@apply my-4 w-full
+		@apply my-4 w-full rounded
 	}
 }

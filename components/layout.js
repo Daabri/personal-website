@@ -36,7 +36,7 @@ export default function Layout({ children, home }) {
 
 			{/* Content */}
 			<div className="w-full grid grid-cols-8">
-				<main className="col-span-8 sm:col-start-3 sm:col-span-4">
+				<main className="col-span-8 sm:col-start-2 sm:col-span-6">
 					{!home && (
 						<Link href="/">
 							<div className="my-4 py-2 px-4 w-max hover:bg-blue-500 text-blue-500 hover:text-white cursor-pointer">
