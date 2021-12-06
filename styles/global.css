@@ -35,7 +35,7 @@
 	article section div ul {
 		@apply my-2 list-disc list-inside
 	}
-	article section div img {
-		@apply my-4 w-full rounded
+	article section div p img {
+		@apply my-4 rounded shadow-md object-center
 	}
 }
