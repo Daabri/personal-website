@@ -32,9 +32,9 @@ export default function Home({ allPostsData }) {
         <title>{siteTitle}</title>
       </Head>
 
-      <section className="col-span-6 py-8 px-2">
+      <section className="col-span-4 py-8 px-2">
         <p className="text-center justify-center">
-          Digital product designer currently designing a variety of B2B products. I also like to horse around with coding, project management and product strategies.
+          Digital product designer currently designing a variety of B2B products. I also fiddle with coding, project management and business strategy sometimes.
           <span
             className="flex justify-center cursor-pointer hover:bg-blue-500 text-blue-500 hover:text-white"
             onClick={() => { navigator.clipboard.writeText("brinkhuis.daan@gmail.com") }}>
