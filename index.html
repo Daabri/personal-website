@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Leadership | Your Name</title>
+    <style>
+        /* Your existing styles here */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Transforming Ideas into Impactful Experiences</h1>
+        <p>Product design leadership that drives innovation and user-centric solutions.</p>
+        <div id="blogPosts" class="buttons">
+            <!-- Blog posts will be dynamically inserted here -->
+        </div>
+        <a href="https://twitter.com/daabri" class="social-link">Follow me on X @daabri</a>
+    </div>
+
+    <script>
+        async function loadBlogPosts() {
+            try {
+                const response = await fetch('/api/blog-posts');
+                const posts = await response.json();
+                const blogPostsContainer = document.getElementById('blogPosts');
+
+                posts.forEach(post => {
+                    const link = document.createElement('a');
+                    link.href = `blog/${post.file}`;
+                    link.className = 'button';
+                    link.textContent = post.title;
+                    blogPostsContainer.appendChild(link);
+                });
+            } catch (error) {
+                console.error('Error loading blog posts:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadBlogPosts);
+    </script>
+</body>
+</html>
