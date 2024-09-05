@@ -1,0 +1,115 @@
+<?php
+function getBlogPosts($directory) {
+    $posts = [];
+    if (is_dir($directory)) {
+        $files = scandir($directory);
+        foreach ($files as $file) {
+            if (pathinfo($file, PATHINFO_EXTENSION) == 'html') {
+                $title = str_replace('-', ' ', pathinfo($file, PATHINFO_FILENAME));
+                $title = ucwords($title); // Capitalize first letter of each word
+                $posts[] = [
+                    'file' => $file,
+                    'title' => $title
+                ];
+            }
+        }
+    }
+    return $posts;
+}
+
+$blogPosts = getBlogPosts('blog');
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Leadership | Your Name</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            color: #333;
+            background-color: #f5f5f5;
+            background-image: 
+                linear-gradient(to right, #e0e0e0 1px, transparent 1px),
+                linear-gradient(to bottom, #e0e0e0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            text-align: center;
+        }
+        p {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .button {
+            display: block;
+            padding: 12px 20px;
+            background-color: #f0f0f0;
+            color: #333;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: 1px solid #d0d0d0;
+            box-shadow: 
+                0 2px 4px rgba(0,0,0,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.5);
+            text-align: left;
+        }
+        .button:hover {
+            background-color: #e8e8e8;
+            transform: translateY(-2px);
+            box-shadow: 
+                0 4px 8px rgba(0,0,0,0.15),
+                inset 0 1px 0 rgba(255,255,255,0.5);
+        }
+        .button:active {
+            transform: translateY(1px);
+            box-shadow: 
+                0 1px 2px rgba(0,0,0,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.5);
+        }
+        .social-link {
+            display: block;
+            margin-top: 30px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Transforming Ideas into Impactful Experiences</h1>
+        <p>Product design leadership that drives innovation and user-centric solutions.</p>
+        <div class="buttons">
+            <?php foreach ($blogPosts as $post): ?>
+                <a href="blog/<?php echo htmlspecialchars($post['file']); ?>" class="button">
+                    <?php echo htmlspecialchars($post['title']); ?>
+                </a>
+            <?php endforeach; ?>
+        </div>
+        <a href="https://twitter.com/daabri" class="social-link">Follow me on X @daabri</a>
+    </div>
+</body>
+</html>
