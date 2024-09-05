@@ -16,7 +16,6 @@ export default async function handler(req, res) {
           .join(' ')
       }));
 
-    res.setHeader('Content-Type', 'application/json');
     res.status(200).json(posts);
   } catch (error) {
     console.error('Error reading blog posts:', error);
