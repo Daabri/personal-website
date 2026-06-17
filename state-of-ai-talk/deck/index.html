@@ -78,6 +78,12 @@
   .srclink{display:inline-block;margin-top:1.3rem;font-family:"JetBrains Mono",monospace;font-size:clamp(.72rem,1vw,.9rem);letter-spacing:.04em;color:var(--coral);text-decoration:none;border-bottom:1px solid rgba(255,21,91,.45);padding-bottom:2px}
   .srclink:hover{border-bottom-color:var(--coral);color:var(--coral-soft)}
   .srclink .ext{opacity:.65;margin-left:.15em}
+  /* closing "see for yourself" link list */
+  .linklist{list-style:none;margin-top:2rem;display:flex;flex-direction:column;gap:1.05rem;max-width:48ch}
+  .linklist a{font-family:"JetBrains Mono",monospace;color:var(--paper);text-decoration:none;display:flex;flex-direction:column;gap:.22rem;border-left:3px solid var(--coral);padding-left:1rem;transition:color .25s}
+  .linklist a:hover{color:var(--coral)}
+  .linklist .lk-t{font-weight:700;font-size:clamp(1rem,1.6vw,1.35rem)}
+  .linklist .lk-u{font-size:clamp(.74rem,1vw,.9rem);color:var(--muted);letter-spacing:.02em}
 
   .say{border-left:4px solid var(--coral);padding:.2rem 0 .2rem 1.5rem;margin-top:1.6rem;font-family:"Raleway",sans-serif;font-weight:800;font-size:clamp(1.5rem,3.2vw,2.8rem);line-height:1.12;letter-spacing:-.01em;max-width:26ch}
   .say em{font-style:normal;color:var(--coral)}
@@ -291,6 +297,14 @@
     <div class="say reveal" style="border-left-width:5px;font-size:clamp(1.6rem,3.6vw,3.2rem);max-width:26ch">The tools keep changing. What lasts is our <em>connected knowledge, and the judgment behind it.</em></div>
     <p class="body reveal" style="margin-top:1.6rem">Every tool we connect, and every skill we write down, makes the next step easier. We are not chasing models. We are building the door.</p>
     <div class="byline reveal" style="margin-top:2.2rem">Thanks.</div>
+  </section>
+
+  <section class="slide" data-ch="-1" data-note="Links to run through, during Q and A or after. Open in a new tab. More can be added any time.">
+    <div class="eyebrow reveal">// See for yourself</div>
+    <h2 class="reveal">Go look<br>for yourself.</h2>
+    <ul class="linklist reveal">
+      <li><a href="https://x.com/businessbarista/status/2061573150719021542" target="_blank" rel="noopener"><span class="lk-t">The Software Factory</span><span class="lk-u">x.com/businessbarista</span></a></li>
+    </ul>
   </section>
 
 </div>
