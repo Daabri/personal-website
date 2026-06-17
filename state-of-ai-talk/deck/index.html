@@ -199,6 +199,7 @@
       <div class="eyebrow reveal">03 // Connecting tools</div>
       <h2 class="reveal">It works from our<br>world, not the whole web.</h2>
       <p class="body reveal" style="margin-top:1.3rem">Connect it to our own tools and it stops guessing. The POS landing page came together from our own work: notes in Granola, plans in Jira, ideas in Confluence, code in GitHub. Joined up, it builds things that fit us.</p>
+      <a class="srclink reveal" href="https://x.com/emmettshine/status/2054539694097015171" target="_blank" rel="noopener">Read: The HTML Brand<span class="ext">&#8599;</span></a>
     </div>
   </section>
 
@@ -289,6 +290,7 @@
       <h2 class="reveal">The same door<br>opens to partners.</h2>
       <p class="body reveal" style="margin-top:1.3rem">A zoo's assistant, a park's tools, an operator's own systems, all able to plug into Convious. Tickets, prices and bookings, in real time, through one open connection. We stop being an app people log into, and become the thing they build on.</p>
       <p class="small reveal">In a market full of separate tools, whoever owns the connection owns the market.</p>
+      <a class="srclink reveal" href="https://x.com/satyanadella/status/2066182223213293753" target="_blank" rel="noopener">Read: Nadella, a frontier needs an ecosystem<span class="ext">&#8599;</span></a>
     </div>
   </section>
 
@@ -304,6 +306,8 @@
     <h2 class="reveal">Go look<br>for yourself.</h2>
     <ul class="linklist reveal">
       <li><a href="https://x.com/businessbarista/status/2061573150719021542" target="_blank" rel="noopener"><span class="lk-t">The Software Factory</span><span class="lk-u">x.com/businessbarista</span></a></li>
+      <li><a href="https://x.com/emmettshine/status/2054539694097015171" target="_blank" rel="noopener"><span class="lk-t">The HTML Brand: the rise of input-based outcomes</span><span class="lk-u">x.com/emmettshine</span></a></li>
+      <li><a href="https://x.com/satyanadella/status/2066182223213293753" target="_blank" rel="noopener"><span class="lk-t">A frontier without an ecosystem is not stable</span><span class="lk-u">x.com/satyanadella</span></a></li>
     </ul>
   </section>
 
@@ -471,6 +475,9 @@ const help = document.getElementById('help');
 let i = 0; const n = slides.length; totEl.textContent = String(n).padStart(2,'0');
 let maxSeen = -1, activeCh = -1;
 const pad = x => String(x).padStart(2,'0');
+// first slide index of each chapter (data-ch 0..5), for the number hotkeys 1..6
+const chapterStart = {};
+slides.forEach((s,idx)=>{ const c = parseInt(s.dataset.ch,10); if(c>=0 && chapterStart[c]===undefined) chapterStart[c]=idx; });
 
 function paintRail(){
   minis.forEach((m,j)=>{
@@ -535,6 +542,11 @@ document.addEventListener('keydown', e=>{
     case 'ArrowLeft': case 'ArrowUp': case 'PageUp': prev(); e.preventDefault(); break;
     case 'Home': show(0); e.preventDefault(); break;
     case 'End': show(n-1); e.preventDefault(); break;
+    case '1': case '2': case '3': case '4': case '5': case '6': {
+      const c = parseInt(e.key,10) - 1; // chapter number to data-ch index
+      if(chapterStart[c]!==undefined){ show(chapterStart[c]); e.preventDefault(); }
+      break;
+    }
     case 'n': case 'N': notes.classList.toggle('open'); break;
     case 'l': case 'L': toggleTheme(); break;
     case 'f': case 'F': if(!document.fullscreenElement){document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();}else{document.exitFullscreen&&document.exitFullscreen();} break;
@@ -544,7 +556,8 @@ document.addEventListener('keydown', e=>{
 let tx=0;
 document.addEventListener('touchstart', e=>{tx=e.changedTouches[0].clientX}, {passive:true});
 document.addEventListener('touchend', e=>{const dx=e.changedTouches[0].clientX-tx; if(Math.abs(dx)>45){dx<0?next():prev();}}, {passive:true});
-document.getElementById('deck').addEventListener('click', e=>{ if(e.target.closest('a')) return; if(e.clientX>innerWidth*0.5) next(); else prev(); });
+// Click navigation is intentionally disabled. Move with arrow keys (or 1-6 to jump
+// to a chapter). Clicks now only follow links, so they never advance the slide.
 
 show(0);
 </script>
