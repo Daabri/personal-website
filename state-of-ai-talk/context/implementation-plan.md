@@ -117,16 +117,28 @@ Interludes (not chapters, rail shows no active artifact):
 - Visual/artifact system, rail, morph, light theme, calm background, grain: DONE in markup/CSS/JS.
 - Artifacts did NOT render when opened via file:// (ESM dynamic import is blocked/flaky on
   file://). There is an animated CSS-gradient fallback behind every artifact so nothing is ever
-  an empty square. Expectation: served over HTTP (daanbrinkhuis.nl) the real shaders render.
+  an empty square. Expectation: served over HTTP the real shaders render.
+- HOSTING + BULLETPROOFING: DONE (2026-06-17). Deck is live at https://state-of-ai-talk.vercel.app
+  as its own isolated static Vercel project (NOT the broken main personal-website project, NOT
+  GitHub Pages — see repo memory `deploy-architecture`). Paper shaders are now bundled locally
+  (`deck/paper-shaders-0.0.76.js`, esbuild bundle of @paper-design/shaders@0.0.76, zero external
+  imports) and all three font families are self-hosted (`deck/fonts.css` + `deck/fonts/*.woff2`,
+  latin + latin-ext only). Verified over HTTP in headless Chromium: 8 WebGL canvases mount,
+  shaders load, fonts load, and the page makes ZERO external network requests. `deck/` is now a
+  fully self-contained deployable folder.
+- KNOWN ITEM TO VERIFY: in headless software-WebGL the big chapter card rendered as a near-solid
+  coral block (rail minis showed the dither texture correctly). Likely a SwiftShader artifact;
+  needs an eyeball on a real GPU. If still flat there, tune the dithering uniforms for the big
+  card (shape field saturates at 740x980 with u_pxSize 2.5).
 
 ## Open items / next steps
-1. Host on daanbrinkhuis.nl and confirm the Paper shaders render over HTTP. This is the main
-   unblock. If the site is a static/Vite/Astro project, prefer installing the library from npm
-   and importing it locally rather than via CDN, so there is zero network dependency at present
-   time. (npm i @paper-design/shaders, pin 0.0.76.)
-2. Decide CDN vs bundled vs React. Cleanest for a personal site: bundle locally.
-3. Verify the chapter -> shape mapping reads well once rendering (swap any that feel off; one
-   line per chapter).
+1. DONE — hosted (own static Vercel project) with shaders bundled locally over HTTP. See Status.
+2. DONE — chose bundled-locally (esbuild). No CDN, no React.
+2a. Custom subdomain talk.daanbrinkhuis.nl: pending. The domain is under a different Vercel
+    account than the `daabri` CLI login; alias from the owning account, then point at the
+    state-of-ai-talk project.
+3. Verify the chapter -> shape mapping reads well once rendering on a real GPU (swap any that
+   feel off; one line per chapter). Tied to the big-card appearance item in Status.
 4. Rail labels are tiny (auto/act/link/skill/loop/mcp). Decide: enlarge, or drop and keep the
    rail purely visual.
 5. Optional: presenter view (current + next + notes), and a flat PDF fallback for any venue

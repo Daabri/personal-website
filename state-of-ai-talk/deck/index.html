@@ -4,9 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The State of AI</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts.css">
 <style>
   :root{
     --ground:#161319; --ground-2:#1e1a24;
@@ -281,22 +279,15 @@
 
 <script type="module">
 let SH = null;
-const CDN = [
-  'https://cdn.jsdelivr.net/npm/@paper-design/shaders@0.0.76/+esm',
-  'https://esm.sh/@paper-design/shaders@0.0.76?bundle',
-  'https://unpkg.com/@paper-design/shaders@0.0.76?module'
-];
-for (const url of CDN) {
-  try {
-    const mod = await import(url);
-    if (mod && mod.ShaderMount) {
-      SH = mod;
-      console.log('[deck] paper-shaders loaded from', url, 'exports:', Object.keys(mod));
-      break;
-    }
-  } catch (e) {
-    console.warn('[deck] shader CDN failed:', url, e);
+// Paper shaders @0.0.76, bundled locally (no runtime network dependency).
+try {
+  const mod = await import('./paper-shaders-0.0.76.js');
+  if (mod && mod.ShaderMount) {
+    SH = mod;
+    console.log('[deck] paper-shaders loaded locally, exports:', Object.keys(mod));
   }
+} catch (e) {
+  console.warn('[deck] local paper-shaders failed to load:', e);
 }
 const FRAG = SH && (SH.ditheringFragmentShader || SH.DitheringFragmentShader || SH.dithering);
 if (!SH) console.warn('[deck] Paper shaders unavailable; using CSS fallback.');
