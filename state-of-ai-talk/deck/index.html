@@ -35,7 +35,7 @@
 
   /* persistent big artifact card (two layers for morph crossfade) */
   /* Landscape, half-screen-width centerpiece on desktop. */
-  #bigCard,#factoryCard{position:fixed;right:5vw;top:50%;transform:translateY(-50%);width:min(50vw,920px);aspect-ratio:3/2;z-index:5;
+  #bigCard,#factoryCard{position:fixed;right:3.5vw;top:50%;transform:translateY(-50%);width:min(64vw,1240px);aspect-ratio:3/2;z-index:5;
     border:1px solid rgba(255,21,91,.45);border-radius:18px;overflow:hidden;
     box-shadow:0 36px 110px -50px rgba(255,21,91,.6);opacity:0;transition:opacity .6s ease,border-color .85s ease,box-shadow .85s ease;pointer-events:none}
   /* MCP is the destination: render it in the brand's opposite (teal) so it pops. */
@@ -54,7 +54,9 @@
   .deck{position:relative;z-index:6;height:100vh;width:100vw}
   .slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:var(--pad);opacity:0;visibility:hidden;pointer-events:none}
   .slide.active{opacity:1;visibility:visible;pointer-events:auto}
-  .slide.has-art{padding-right:58vw}
+  .slide.has-art{padding-right:69vw}
+  /* bigger artifact = narrower text column, so ease the headline down on art slides */
+  .slide.has-art h2{font-size:clamp(1.5rem,3vw,2.9rem)}
   @media (max-width:900px){.slide.has-art{padding-right:var(--pad)}}
   .reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
   .slide.active .reveal{opacity:1;transform:none}
@@ -157,114 +159,114 @@
   <section class="slide" data-ch="-1" data-note="The map. Point at the rail: these six are the whole talk.">
     <div class="eyebrow reveal">00:00 // The map</div>
     <h2 class="reveal">Six steps.<br>One direction.</h2>
-    <p class="body reveal" style="margin-top:1.5rem">AI didn't arrive in a thunderclap. It climbed a ladder, one rung at a time. Up top are all six. Each one changed the outcome, not just the tooling. The last one is what we're building now.</p>
+    <p class="body reveal" style="margin-top:1.5rem">AI did not arrive all at once. It came one step at a time. All six are up top. Each step changed the result, not just the tools. The last one is what we are building now.</p>
   </section>
 
-  <section class="slide has-art" data-ch="0" data-shape="4" data-artnum="01" data-artlabel="Autocomplete" data-note="Least exciting rung, everyone already uses it. Quick.">
+  <section class="slide has-art" data-ch="0" data-shape="4" data-artnum="01" data-artlabel="Autocomplete" data-note="Least exciting step, everyone already uses it. Quick.">
     <div class="chap-text">
       <div class="bignum reveal">01</div>
       <div class="eyebrow reveal">01 // Autocomplete</div>
       <h2 class="reveal">Everyone just<br>got faster.</h2>
-      <p class="body reveal" style="margin-top:1.3rem">It started quietly. Suggestions while you type. Emails, docs, code, spreadsheets, all a little quicker. Same job, less friction. Nobody's role changed. The warm-up.</p>
+      <p class="body reveal" style="margin-top:1.3rem">It started quietly. The tool suggests words while you type. Emails, documents, code, spreadsheets, all a little quicker. Same job, less effort. Nobody's role changed. This was the warm-up.</p>
     </div>
   </section>
 
-  <section class="slide has-art" data-ch="1" data-shape="2" data-artnum="02" data-artlabel="Agents that act" data-note="Your story. POS lock-screen shaders via Claude Code, shipping your own PRs.">
+  <section class="slide has-art" data-ch="1" data-shape="2" data-artnum="02" data-artlabel="Agents that act" data-note="Your story. POS lock-screen shaders via Claude Code, shipping your own code.">
     <div class="chap-text">
       <div class="bignum reveal">02</div>
       <div class="eyebrow reveal">02 // Agents that act</div>
       <h2 class="reveal">It stops suggesting.<br>It does.</h2>
-      <p class="body reveal" style="margin-top:1.3rem">Hand it a task, it does the task. For me that meant finally shipping my own PRs, the design engineer I always wanted to be. I built the shaders on the POS lock screen with Claude Code. Design that ships itself.</p>
+      <p class="body reveal" style="margin-top:1.3rem">You give it a task, and it does the task. For me, that meant finally shipping my own code, the design engineer I always wanted to be. I built the moving shapes on the POS lock screen with Claude Code. Design that ships itself.</p>
       <p class="quote reveal"><span class="mk">&ldquo;</span>Code must not be written by humans.<span class="mk">&rdquo;</span></p>
-      <p class="attr reveal">StrongDM, an engineering principle</p>
+      <p class="attr reveal">StrongDM, a company rule</p>
     </div>
   </section>
 
-  <section class="slide has-art" data-ch="2" data-shape="3" data-artnum="03" data-artlabel="Connecting tools" data-note="POS landing page from our own context. Output that fits us.">
+  <section class="slide has-art" data-ch="2" data-shape="3" data-artnum="03" data-artlabel="Connecting tools" data-note="POS landing page from our own tools. Output that fits us.">
     <div class="chap-text">
       <div class="bignum reveal">03</div>
       <div class="eyebrow reveal">03 // Connecting tools</div>
-      <h2 class="reveal">It works from our<br>world, not the web's.</h2>
-      <p class="body reveal" style="margin-top:1.3rem">Plug it into our actual tools and it stops guessing. The POS landing page came together from our own context: notes in Granola, specs in Jira, shaping in Confluence, code in GitHub. Wired up, it builds things that fit us.</p>
+      <h2 class="reveal">It works from our<br>world, not the whole web.</h2>
+      <p class="body reveal" style="margin-top:1.3rem">Connect it to our own tools and it stops guessing. The POS landing page came together from our own work: notes in Granola, plans in Jira, ideas in Confluence, code in GitHub. Joined up, it builds things that fit us.</p>
     </div>
   </section>
 
-  <section class="slide has-art" data-ch="3" data-shape="5" data-artnum="04" data-artlabel="Skills" data-note="SEO review skill. Marketing gets the review on demand.">
+  <section class="slide has-art" data-ch="3" data-shape="5" data-artnum="04" data-artlabel="Skills" data-note="SEO review skill. Marketing gets the review any time.">
     <div class="chap-text">
       <div class="bignum reveal">04</div>
       <div class="eyebrow reveal">04 // Skills</div>
       <h2 class="reveal">Do it once. Never<br>explain it again.</h2>
-      <p class="body reveal" style="margin-top:1.3rem">Anything you repeat becomes a skill the tools reuse. My SEO review runs as a skill now. The checklist I used to run by hand, captured once, applied every time. Marketing gets the same review on demand, no me required.</p>
+      <p class="body reveal" style="margin-top:1.3rem">Anything you do often becomes a skill the tools can reuse. My SEO review is a skill now. The checklist I used to run by hand, saved once, used every time. Marketing gets the same review any time, with no help from me.</p>
     </div>
   </section>
 
-  <section class="slide has-art" data-ch="4" data-shape="6" data-artnum="05" data-artlabel="Looping agents" data-note="Newest rung. The loop runs and checks itself. Boris quote.">
+  <section class="slide has-art" data-ch="4" data-shape="6" data-artnum="05" data-artlabel="Looping agents" data-note="Newest step. The loop runs and checks itself. Boris quote.">
     <div class="chap-text">
       <div class="bignum reveal">05</div>
       <div class="eyebrow reveal">05 // Looping agents</div>
-      <h2 class="reveal">You stop prompting.<br>You write the loop.</h2>
-      <p class="body reveal" style="margin-top:1.3rem">The newest rung. Instead of asking each time, you set up a loop that runs, checks its own work, and keeps going. Triage, build, review, on repeat, while you do something else.</p>
+      <h2 class="reveal">You stop asking.<br>You write the loop.</h2>
+      <p class="body reveal" style="margin-top:1.3rem">The newest step. Instead of asking each time, you set up a loop that runs on its own, checks its own work, and keeps going. Find, build, check, again and again, while you do something else.</p>
       <p class="quote reveal"><span class="mk">&ldquo;</span>My job is to write loops.<span class="mk">&rdquo;</span></p>
       <p class="attr reveal">Boris Cherny, creator of Claude Code</p>
     </div>
   </section>
 
-  <section class="slide has-art" data-ch="4" data-shape="6" data-artnum="05" data-artlabel="Looping agents" data-note="This is THIS month. It's being defined live. Steinberger June 7, Boris 259 PRs, deleted his IDE in November.">
+  <section class="slide has-art" data-ch="4" data-shape="6" data-artnum="05" data-artlabel="Looping agents" data-note="This is THIS month. It's being defined live. Steinberger June 7, Boris 259 changes, deleted his editor in November.">
     <div class="chap-text">
       <div class="bignum reveal">05</div>
       <div class="eyebrow reveal">// This month</div>
-      <h2 class="reveal">The newest rung is<br>being named right now.</h2>
-      <p class="body reveal" style="margin-top:1.3rem">This June, one line took over the timeline: stop prompting agents, start writing the loops that prompt them. Boris Cherny, who built Claude Code, has not opened his editor since November. In his last 30 days, every one of his 259 changes was written by Claude Code. He just writes the loops.</p>
+      <h2 class="reveal">This is happening<br>right now.</h2>
+      <p class="body reveal" style="margin-top:1.3rem">This June, one idea was everywhere online: stop asking agents one by one. Instead, write a loop that asks them for you. Boris Cherny, who built Claude Code, has not opened his code editor since November. In his last 30 days, every change he made, 259 of them, was written by Claude Code. He just writes the loops.</p>
       <p class="quote reveal" style="font-size:clamp(1.2rem,2.4vw,2rem)"><span class="mk">&ldquo;</span>You should be designing loops that prompt your agents.<span class="mk">&rdquo;</span></p>
       <p class="attr reveal">Peter Steinberger, June 2026, 2.2 million views</p>
     </div>
   </section>
 
-  <section class="slide has-art" data-ch="-1" data-factory="1" data-note="Zoom out. We have industrialized before. The line moved people from doing to directing. Same move now.">
+  <section class="slide has-art" data-ch="-1" data-factory="1" data-note="Zoom out. We have done this before. The line moved people from doing to directing. Same move now.">
     <div class="chap-text">
       <div class="eyebrow reveal">// The pattern</div>
-      <h2 class="reveal">We have<br>industrialized before.</h2>
-      <p class="body reveal" style="margin-top:1.3rem">A line like this took people off building each car by hand and put them on designing and running the line. Same move now. We go from writing the code to writing the system that writes it. The work moves up a level, from doing it to directing it.</p>
+      <h2 class="reveal">We have done<br>this before.</h2>
+      <p class="body reveal" style="margin-top:1.3rem">A line like this took people off building each car by hand. It put them on designing and running the line instead. Same move now. We go from writing the code to building the thing that writes the code. The work moves up: from doing it to directing it.</p>
     </div>
   </section>
 
   <section class="slide" data-ch="-1" data-note="Light and informational. Not magic, not nothing. The boring part is the real part.">
     <div class="eyebrow reveal">// Reality check</div>
     <h2 class="reveal">Not all of it<br>is magic.</h2>
-    <p class="body reveal" style="margin-top:1.4rem;max-width:40ch">Some of it is genuinely new. Some of it is a for-loop with a confident voice and a large monthly bill. The skill is telling them apart. And most of the real work now is the unglamorous part: the guardrails that make it stop and check itself.</p>
+    <p class="body reveal" style="margin-top:1.4rem;max-width:40ch">Some of it is truly new. Some of it is a simple script with a confident voice and a big monthly bill. The trick is telling the two apart. And most of the real work now is the boring part: the limits and checks that make it stop and check its own work.</p>
   </section>
 
-  <section class="slide" data-ch="-1" data-note="The bill is real. Uber burned its annual budget in 4 months, capped 1500 per tool. Gartner 17 percent actually running agents.">
+  <section class="slide" data-ch="-1" data-note="The bill is real. Uber spent a year's budget in 4 months, set a 1500 limit per tool. Gartner: only 17 percent actually run agents.">
     <div class="eyebrow reveal">// The receipts</div>
     <h2 class="reveal">And the bill<br>is real.</h2>
-    <p class="body reveal" style="margin-top:1.4rem;max-width:42ch">Uber told its engineers to use AI as much as possible, burned its annual budget in four months, and capped each person at 1,500 dollars per tool. Gartner counts 17 percent of companies actually running agents. The hype is at its peak. The proof is still catching up.</p>
-    <p class="small reveal">So most of the real work now is the unglamorous part: the caps, the checks, and making the loop stop.</p>
+    <p class="body reveal" style="margin-top:1.4rem;max-width:42ch">Uber told its engineers to use AI as much as possible. They spent a whole year's budget in four months. Now each person has a limit of 1,500 dollars per tool. Gartner says only 17 percent of companies actually run agents today. The excitement is at its highest. The proof is still catching up.</p>
+    <p class="small reveal">So most of the real work now is the boring part: setting spending limits, checking the work, and making the loop stop when it should.</p>
   </section>
 
   <section class="slide" data-ch="-1" data-note="Trajectory. Verify line. Human note. Slow here.">
     <div class="eyebrow reveal">// Where it goes</div>
-    <p class="quote reveal" style="max-width:26ch;font-size:clamp(1.5rem,3vw,2.6rem)"><span class="mk">&ldquo;</span>AI automates what you can verify.<span class="mk">&rdquo;</span></p>
+    <p class="quote reveal" style="max-width:26ch;font-size:clamp(1.5rem,3vw,2.6rem)"><span class="mk">&ldquo;</span>AI does the work you can check.<span class="mk">&rdquo;</span></p>
     <p class="attr reveal">Andrej Karpathy</p>
-    <p class="reveal" style="font-family:Raleway;font-weight:800;font-size:clamp(1.35rem,2.6vw,2.3rem);line-height:1.16;margin-top:1.6rem;max-width:28ch">If you can check it, a machine can do it. If you can't, it stays human. Judgment, taste, direction. <span style="color:var(--coral)">Still ours.</span></p>
-    <p class="small reveal" style="font-style:italic">"Without human direction, you have compute running in circles." &nbsp;&mdash; Satya Nadella</p>
+    <p class="reveal" style="font-family:Raleway;font-weight:800;font-size:clamp(1.35rem,2.6vw,2.3rem);line-height:1.16;margin-top:1.6rem;max-width:28ch">If you can check it, a machine can do it. If you cannot, it stays human. Judgment, taste, direction. <span style="color:var(--coral)">Still ours.</span></p>
+    <p class="small reveal" style="font-style:italic">"Without people to steer it, you just have computers running in circles." Satya Nadella</p>
   </section>
 
-  <section class="slide has-art" data-ch="5" data-shape="7" data-artnum="06" data-artlabel="MCP" data-note="The rung we're building. Say MCP, translate immediately.">
+  <section class="slide has-art" data-ch="5" data-shape="7" data-artnum="06" data-artlabel="MCP" data-note="The step we're building. Say MCP, then explain it right away.">
     <div class="chap-text">
       <div class="bignum reveal">06</div>
       <div class="eyebrow reveal">06 // MCP</div>
       <h2 class="reveal">One port.<br>Many cables.</h2>
-      <p class="body reveal" style="margin-top:1.3rem">The next rung, and the one we're building. Today every tool is wired up by hand, per project. MCP is one shared doorway any AI plugs into, for all our data, docs and tools. Build it once, everyone uses it.</p>
-      <p class="small reveal">Anthropic's USB-C for AI. An open standard. OpenAI, Google and Microsoft all use it.</p>
+      <p class="body reveal" style="margin-top:1.3rem">The next step, and the one we are building. Today we connect every tool by hand, project by project. MCP is one shared door that any AI plugs into, for all our data, documents and tools. Build it once, everyone uses it.</p>
+      <p class="small reveal">Think of it as USB-C for AI, from Anthropic. An open standard. OpenAI, Google and Microsoft all use it.</p>
     </div>
   </section>
 
-  <section class="slide has-art" data-ch="5" data-shape="7" data-artnum="06" data-artlabel="MCP, for us" data-note="Cross-department. Snowflake from inside Claude, Copilot, ChatGPT. No SQL.">
+  <section class="slide has-art" data-ch="5" data-shape="7" data-artnum="06" data-artlabel="MCP, for us" data-note="Cross-department. Snowflake from inside Claude, Copilot, ChatGPT. No code.">
     <div class="chap-text">
       <div class="bignum reveal">06</div>
       <div class="eyebrow reveal">06 // MCP, for us</div>
       <h2 class="reveal">Ask our data<br>a question.</h2>
-      <p class="body reveal" style="margin-top:1.3rem">It's already starting. We can reach Snowflake from inside Claude, Copilot and ChatGPT now. No SQL, no waiting on a dashboard. Anyone, any department, asks in plain language and gets an answer from our own numbers.</p>
+      <p class="body reveal" style="margin-top:1.3rem">It is already starting. We can reach our Snowflake data from inside Claude, Copilot and ChatGPT now. No code, no waiting for a dashboard. Anyone, in any team, asks in plain language and gets an answer from our own numbers.</p>
     </div>
   </section>
 
@@ -273,15 +275,15 @@
       <div class="bignum reveal">06</div>
       <div class="eyebrow reveal">06 // MCP, outward</div>
       <h2 class="reveal">The same door<br>opens to partners.</h2>
-      <p class="body reveal" style="margin-top:1.3rem">A zoo's assistant, a park's tools, an operator's own systems, all able to plug into Convious. Availability, pricing, bookings, in real time, through one open connection. We stop being an app people log into and become the layer they build on.</p>
-      <p class="small reveal">Whoever owns the connective layer in a fragmented market owns the market.</p>
+      <p class="body reveal" style="margin-top:1.3rem">A zoo's assistant, a park's tools, an operator's own systems, all able to plug into Convious. Tickets, prices and bookings, in real time, through one open connection. We stop being an app people log into, and become the thing they build on.</p>
+      <p class="small reveal">In a market full of separate tools, whoever owns the connection owns the market.</p>
     </div>
   </section>
 
   <section class="slide" data-ch="-1" data-note="Final line. Slow. Then thanks.">
     <div class="eyebrow reveal">// The takeaway</div>
-    <div class="say reveal" style="border-left-width:5px;font-size:clamp(1.6rem,3.6vw,3.2rem);max-width:26ch">The tools keep changing. What compounds is our <em>connected context, and the judgment behind it.</em></div>
-    <p class="body reveal" style="margin-top:1.6rem">Every tool we connect and every skill we write down makes the next step easier. We're not chasing models. We're building the doorway.</p>
+    <div class="say reveal" style="border-left-width:5px;font-size:clamp(1.6rem,3.6vw,3.2rem);max-width:26ch">The tools keep changing. What lasts is our <em>connected knowledge, and the judgment behind it.</em></div>
+    <p class="body reveal" style="margin-top:1.6rem">Every tool we connect, and every skill we write down, makes the next step easier. We are not chasing models. We are building the door.</p>
     <div class="byline reveal" style="margin-top:2.2rem">Thanks.</div>
   </section>
 
