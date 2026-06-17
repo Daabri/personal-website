@@ -41,7 +41,7 @@ Interludes (not chapters, rail shows no active artifact):
 - Where it goes: verifiability (Karpathy), judgment stays human (Nadella).
 - Close / takeaway: tools change, our connected context + judgment compounds. MCP is the moat.
 
-## Slide order (current, 13 slides)
+## Slide order (current, 16 slides)
 1. Title
 2. The map (overview of the six)
 3. 01 Autocomplete            [artifact: wave]
@@ -49,12 +49,29 @@ Interludes (not chapters, rail shows no active artifact):
 5. 03 Connecting tools        [artifact: dots]
 6. 04 Skills                  [artifact: ripple]
 7. 05 Looping agents          [artifact: swirl]  + Boris Cherny quote
-8. Reality check
-9. Where it goes              + Karpathy quote + Nadella line
-10. 06 MCP — what it is       [artifact: sphere]
-11. 06 MCP — for us           [artifact: sphere]
-12. 06 MCP — outward          [artifact: sphere]
-13. Close / takeaway
+8. // This month              [artifact: swirl]  + Steinberger quote (NEW, deepened end)
+9. // The pattern             [DITHERED IMAGE: Ford 1913 assembly line] (NEW)
+10. Reality check
+11. // The receipts           Uber cap + Gartner 17% (NEW)
+12. Where it goes             + Karpathy quote + Nadella line
+13. 06 MCP — what it is       [artifact: sphere, teal]
+14. 06 MCP — for us           [artifact: sphere, teal]
+15. 06 MCP — outward          [artifact: sphere, teal]
+16. Close / takeaway
+
+### Deepened end (2026-06-17): slowing down + zooming into the last 1-2 months
+Three slides added to the back half to stretch the talk past ~10 min and zoom into the
+present moment, all from the curated June 2026 articles and web-verified:
+- "// This month": the June 2026 loops moment. Steinberger (June 7, 2.2M views) + Boris
+  (259 PRs in 30 days, deleted his IDE in November). Continues the swirl/loop artifact.
+- "// The pattern": software-factory framing. PUBLIC-DOMAIN Ford 1913 moving-assembly-line
+  photo (US National Archives), run through the library's imageDitheringFragmentShader in
+  coral so it matches the artifact system. Bundled locally as deck/factory-1913.jpg. Shown
+  via #factoryCard + body.show-factory, slide carries data-factory.
+- "// The receipts": cost/adoption reality. Uber $1,500/tool cap after burning its annual
+  budget in 4 months (TechCrunch/Bloomberg/Simon Willison, June 2026); Gartner 2026 Hype
+  Cycle, 17% of orgs actually running agents (Peak of Inflated Expectations).
+All four stats web-verified against real reporting before going on a company stage.
 
 ## Quotes used (short, attributed; sources in context/articles)
 - "Code must not be written by humans." — StrongDM (via Software Factory article). Slide 4.

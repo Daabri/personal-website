@@ -35,19 +35,20 @@
 
   /* persistent big artifact card (two layers for morph crossfade) */
   /* Landscape, half-screen-width centerpiece on desktop. */
-  #bigCard{position:fixed;right:5vw;top:50%;transform:translateY(-50%);width:min(50vw,920px);aspect-ratio:3/2;z-index:5;
+  #bigCard,#factoryCard{position:fixed;right:5vw;top:50%;transform:translateY(-50%);width:min(50vw,920px);aspect-ratio:3/2;z-index:5;
     border:1px solid rgba(255,21,91,.45);border-radius:18px;overflow:hidden;
     box-shadow:0 36px 110px -50px rgba(255,21,91,.6);opacity:0;transition:opacity .6s ease,border-color .85s ease,box-shadow .85s ease;pointer-events:none}
   /* MCP is the destination: render it in the brand's opposite (teal) so it pops. */
   #bigCard.mcp{border-color:rgba(0,230,160,.55);box-shadow:0 36px 110px -50px rgba(0,230,160,.6)}
   #bigCard.mcp .anum{color:#00e6a0}
   body.show-art #bigCard{opacity:1}
+  body.show-factory #factoryCard{opacity:1}
   #bigA,#bigB{position:absolute;inset:0;transition:opacity .85s ease;
     background:linear-gradient(135deg, rgba(255,21,91,.18), rgba(30,26,36,.35) 45%, rgba(255,21,91,.4));background-size:220% 220%;animation:artpulse 7s ease infinite}
   @keyframes artpulse{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-  #bigCard .anum{position:absolute;right:14px;top:10px;z-index:3;font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.12em;color:var(--coral)}
-  #bigCard .alabel{position:absolute;left:14px;bottom:12px;z-index:3;font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#f3efe9;opacity:.92;mix-blend-mode:difference}
-  @media (max-width:900px){#bigCard{display:none}}
+  #bigCard .anum,#factoryCard .anum{position:absolute;right:14px;top:10px;z-index:3;font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.12em;color:var(--coral)}
+  #bigCard .alabel,#factoryCard .alabel{position:absolute;left:14px;bottom:12px;z-index:3;font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#f3efe9;opacity:.92;mix-blend-mode:difference}
+  @media (max-width:900px){#bigCard,#factoryCard{display:none}}
 
   /* slides */
   .deck{position:relative;z-index:6;height:100vh;width:100vw}
@@ -133,6 +134,7 @@
 <div class="scrim"></div>
 
 <div id="bigCard"><div id="bigA"></div><div id="bigB"></div><span class="anum">01</span><span class="alabel">Autocomplete</span></div>
+<div id="factoryCard"><span class="anum">1913</span><span class="alabel">Ford, first moving assembly line</span></div>
 
 <div class="rail" id="rail">
   <div class="mini" data-shape="4"><div class="sq"></div><div class="ml">auto</div></div>
@@ -207,10 +209,36 @@
     </div>
   </section>
 
+  <section class="slide has-art" data-ch="4" data-shape="6" data-artnum="05" data-artlabel="Looping agents" data-note="This is THIS month. It's being defined live. Steinberger June 7, Boris 259 PRs, deleted his IDE in November.">
+    <div class="chap-text">
+      <div class="bignum reveal">05</div>
+      <div class="eyebrow reveal">// This month</div>
+      <h2 class="reveal">The newest rung is<br>being named right now.</h2>
+      <p class="body reveal" style="margin-top:1.3rem">This June, one line took over the timeline: stop prompting agents, start writing the loops that prompt them. Boris Cherny, who built Claude Code, has not opened his editor since November. In his last 30 days, every one of his 259 changes was written by Claude Code. He just writes the loops.</p>
+      <p class="quote reveal" style="font-size:clamp(1.2rem,2.4vw,2rem)"><span class="mk">&ldquo;</span>You should be designing loops that prompt your agents.<span class="mk">&rdquo;</span></p>
+      <p class="attr reveal">Peter Steinberger, June 2026, 2.2 million views</p>
+    </div>
+  </section>
+
+  <section class="slide has-art" data-ch="-1" data-factory="1" data-note="Zoom out. We have industrialized before. The line moved people from doing to directing. Same move now.">
+    <div class="chap-text">
+      <div class="eyebrow reveal">// The pattern</div>
+      <h2 class="reveal">We have<br>industrialized before.</h2>
+      <p class="body reveal" style="margin-top:1.3rem">A line like this took people off building each car by hand and put them on designing and running the line. Same move now. We go from writing the code to writing the system that writes it. The work moves up a level, from doing it to directing it.</p>
+    </div>
+  </section>
+
   <section class="slide" data-ch="-1" data-note="Light and informational. Not magic, not nothing. The boring part is the real part.">
     <div class="eyebrow reveal">// Reality check</div>
     <h2 class="reveal">Not all of it<br>is magic.</h2>
     <p class="body reveal" style="margin-top:1.4rem;max-width:40ch">Some of it is genuinely new. Some of it is a for-loop with a confident voice and a large monthly bill. The skill is telling them apart. And most of the real work now is the unglamorous part: the guardrails that make it stop and check itself.</p>
+  </section>
+
+  <section class="slide" data-ch="-1" data-note="The bill is real. Uber burned its annual budget in 4 months, capped 1500 per tool. Gartner 17 percent actually running agents.">
+    <div class="eyebrow reveal">// The receipts</div>
+    <h2 class="reveal">And the bill<br>is real.</h2>
+    <p class="body reveal" style="margin-top:1.4rem;max-width:42ch">Uber told its engineers to use AI as much as possible, burned its annual budget in four months, and capped each person at 1,500 dollars per tool. Gartner counts 17 percent of companies actually running agents. The hype is at its peak. The proof is still catching up.</p>
+    <p class="small reveal">So most of the real work now is the unglamorous part: the caps, the checks, and making the loop stop.</p>
   </section>
 
   <section class="slide" data-ch="-1" data-note="Trajectory. Verify line. Human note. Slow here.">
@@ -382,6 +410,34 @@ const bigCard = document.getElementById('bigCard');
 const anum = document.querySelector('#bigCard .anum');
 const alabel = document.querySelector('#bigCard .alabel');
 
+/* ---- factory image, dithered through the same shader system (coral) ---- */
+const factoryCard = document.getElementById('factoryCard');
+const IMG_FRAG = SH && (SH.imageDitheringFragmentShader || SH.ImageDitheringFragmentShader);
+if(SH && IMG_FRAG){
+  const img = new Image();
+  img.onload = () => {
+    try{
+      new SH.ShaderMount(factoryCard, IMG_FRAG, {
+        u_image: img,
+        u_imageAspectRatio: img.naturalWidth / img.naturalHeight,
+        u_colorBack: PAL.dark.on.back,
+        u_colorFront: [1,0.082,0.357,1],
+        u_colorHighlight: [1,0.42,0.6,1],
+        u_originalColors: false,
+        u_inverted: false,
+        u_type: (SH.DitheringTypes && SH.DitheringTypes['4x4']) || 3,
+        u_pxSize: 2.0,
+        u_colorSteps: 3,
+        u_fit: 2, u_scale: 1, u_rotation: 0,
+        u_offsetX: 0, u_offsetY: 0,
+        u_originX: 0.5, u_originY: 0.5,
+        u_worldWidth: 0, u_worldHeight: 0
+      });
+    }catch(e){ console.warn('[deck] factory image shader failed', e); }
+  };
+  img.src = 'factory-1913.jpg';
+}
+
 /* ---- navigation ---- */
 const slides = Array.from(document.querySelectorAll('.slide'));
 const fill = document.getElementById('fill');
@@ -420,6 +476,8 @@ function show(idx){
   paintRail();
 
   const shapeAttr = slides[i].dataset.shape;
+  const isFactory = slides[i].dataset.factory;
+  document.body.classList.toggle('show-factory', !!isFactory);
   if(shapeAttr){
     document.body.classList.add('show-art');
     anum.textContent = slides[i].dataset.artnum || '';
