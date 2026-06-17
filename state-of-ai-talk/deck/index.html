@@ -74,6 +74,13 @@
   .byline{margin-top:auto;font-family:"JetBrains Mono",monospace;font-size:clamp(.8rem,1.1vw,1rem);color:var(--muted);letter-spacing:.04em}
   .body{font-size:clamp(1.05rem,1.65vw,1.5rem);line-height:1.5;max-width:34ch;font-weight:500}
   .small{font-size:clamp(.9rem,1.3vw,1.15rem);color:var(--muted);line-height:1.5;max-width:40ch;margin-top:1.3rem}
+  /* talking-point bullets (cue cards for the speaker, not a script) */
+  .cues{list-style:none;margin-top:1.2rem;display:flex;flex-direction:column;gap:.55rem;max-width:34ch}
+  .cues li{position:relative;padding-left:1.05rem;font-size:clamp(.92rem,1.35vw,1.2rem);line-height:1.34;font-weight:500;color:var(--paper)}
+  .cues li::before{content:"";position:absolute;left:0;top:.5em;width:6px;height:6px;background:var(--coral)}
+  .cues.lead{max-width:32ch;gap:.85rem}
+  .cues.lead li{font-size:clamp(1.05rem,1.9vw,1.6rem)}
+  .cues.lead li::before{top:.55em;width:8px;height:8px}
   /* clickable source/example link (opens in a new tab, does not advance the slide) */
   .srclink{display:inline-block;margin-top:1.3rem;font-family:"JetBrains Mono",monospace;font-size:clamp(.72rem,1vw,.9rem);letter-spacing:.04em;color:var(--coral);text-decoration:none;border-bottom:1px solid rgba(255,21,91,.45);padding-bottom:2px}
   .srclink:hover{border-bottom-color:var(--coral);color:var(--coral-soft)}
@@ -132,8 +139,41 @@
   .help-card dd{color:#9c94a8}
   .help-card .x{margin-top:1.6rem;font-family:"JetBrains Mono",monospace;font-size:.78rem;color:#9c94a8}
 
+  /* ---- chapter sneak-peek orbs: fly in from corners on the dim, converge in
+     the centre, then morph up into the rail on the map slide ---- */
+  #orbs{position:fixed;inset:0;z-index:9;pointer-events:none}
+  .orb{position:absolute;top:0;left:0;width:140px;height:140px;opacity:0;
+    transform:translate(-280px,-280px) scale(.4);will-change:transform,opacity}
+  .orb .orbsq{position:absolute;inset:0;border-radius:50%;overflow:hidden;border:1px solid var(--coral);
+    background:linear-gradient(120deg, rgba(255,21,91,0), rgba(255,21,91,.5), rgba(255,21,91,0));background-size:220% 100%;animation:artpulse 4s linear infinite;
+    box-shadow:0 18px 55px -22px rgba(255,21,91,.75);transition:border-radius .8s ease,box-shadow .8s ease,border-color .8s ease}
+  .orb.mcp .orbsq{border-color:rgba(0,230,160,.7);box-shadow:0 18px 55px -22px rgba(0,230,160,.7)}
+  .orb .orbl{position:absolute;top:106%;left:50%;transform:translateX(-50%);white-space:nowrap;
+    font-family:"JetBrains Mono",monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--coral);opacity:.9;transition:opacity .45s ease}
+  .orb.mcp .orbl{color:#00e6a0}
+  body.orbs-railing .orb .orbl{opacity:0}
+  /* real rail stays hidden while the orbs stand in for it */
+  .rail{transition:opacity .6s ease}
+  body.rail-hidden .rail{opacity:0;pointer-events:none}
+  /* hold the title-slide text hidden until the orbs have settled */
+  .slide.holding .reveal{opacity:0!important;transform:translateY(16px)!important;transition:none!important}
+  @media (max-width:900px){#orbs{display:none}}
+
+  /* ---- text-only slides centre themselves; slides with an art card keep
+     their text on the side (handled by .has-art) ---- */
+  .slide.centered{align-items:center;text-align:center}
+  .slide.centered .sub,.slide.centered .body,.slide.centered .small,.slide.centered .say,
+  .slide.centered .quote,.slide.centered .linklist,.slide.centered .cues{margin-left:auto;margin-right:auto}
+  .slide.centered .cues{text-align:left}
+  .slide.centered .say{border-left:0!important;padding-left:0!important}
+  .slide.centered .linklist a{border-left:0;padding-left:0;text-align:center}
+  /* title slide: keep the headline up top so the orb band has the lower-centre to itself */
+  .slide.title-slide{justify-content:flex-start;padding-top:9vh}
+
   @media (prefers-reduced-motion: reduce){
     .reveal,.mini .sq{transition:none}.reveal{opacity:1;transform:none}.grain{animation:none}
+    #orbs{display:none}.slide.holding .reveal{opacity:1!important;transform:none!important}
+    body.rail-hidden .rail{opacity:1}
   }
 </style>
 </head>
@@ -166,6 +206,15 @@
   <div class="mini" data-shape="7"><div class="sq"></div><div class="ml">mcp</div></div>
 </div>
 
+<div id="orbs" aria-hidden="true">
+  <div class="orb" data-shape="4"><div class="orbsq"></div><div class="orbl">auto</div></div>
+  <div class="orb" data-shape="2"><div class="orbsq"></div><div class="orbl">act</div></div>
+  <div class="orb" data-shape="3"><div class="orbsq"></div><div class="orbl">link</div></div>
+  <div class="orb" data-shape="5"><div class="orbsq"></div><div class="orbl">skill</div></div>
+  <div class="orb" data-shape="6"><div class="orbsq"></div><div class="orbl">loop</div></div>
+  <div class="orb" data-shape="7"><div class="orbsq"></div><div class="orbl">mcp</div></div>
+</div>
+
 <div class="deck" id="deck">
 
   <section class="slide" data-intro="1" data-ch="-1" data-note="Cold open, just the screenshot. Say it out loud: I needed to present on AI, so I asked Claude to read the X bookmarks I never actually read myself. That is the whole prep. Then press right to dim the lights.">
@@ -175,7 +224,7 @@
     <div class="intro-cue reveal">&rarr;</div>
   </section>
 
-  <section class="slide" data-ch="-1" data-note="Keys: arrows or space to move. N notes. F fullscreen. L light/dark. ? help.">
+  <section class="slide title-slide" data-ch="-1" data-note="Keys: arrows or space to move. N notes. F fullscreen. L light/dark. ? help.">
     <div class="eyebrow reveal">Company all-hands &nbsp;//&nbsp; ~15 min</div>
     <h1 class="reveal">The State<br>of AI</h1>
     <p class="sub reveal">What's been happening, in six steps. And where we take it next.</p>
@@ -192,6 +241,11 @@
       <div class="bignum reveal">01</div>
       <div class="eyebrow reveal">01 // Autocomplete</div>
       <h2 class="reveal">Everyone just<br>got faster.</h2>
+      <ul class="cues reveal">
+        <li>Suggestions while you type</li>
+        <li>Same job, less effort</li>
+        <li>No role changed yet. The warm-up.</li>
+      </ul>
     </div>
   </section>
 
@@ -200,6 +254,11 @@
       <div class="bignum reveal">01</div>
       <div class="eyebrow reveal">01 // The chat</div>
       <h2 class="reveal">People changed faster<br>than the tools.</h2>
+      <ul class="cues reveal">
+        <li>A text box that answered like a colleague</li>
+        <li>No plugins, no code, still changed everything</li>
+        <li>The seeds of today's agents</li>
+      </ul>
     </div>
   </section>
 
@@ -208,6 +267,10 @@
       <div class="bignum reveal">02</div>
       <div class="eyebrow reveal">02 // Agents that act</div>
       <h2 class="reveal">It stops suggesting.<br>It does.</h2>
+      <ul class="cues reveal">
+        <li>Hand it a task, it does the task</li>
+        <li>I shipped my own code: the POS lock screen</li>
+      </ul>
       <p class="quote reveal"><span class="mk">&ldquo;</span>Code must not be written by humans.<span class="mk">&rdquo;</span></p>
       <p class="attr reveal">StrongDM, a company rule</p>
     </div>
@@ -218,6 +281,10 @@
       <div class="bignum reveal">03</div>
       <div class="eyebrow reveal">03 // Connecting tools</div>
       <h2 class="reveal">It works from our<br>world, not the whole web.</h2>
+      <ul class="cues reveal">
+        <li>Connect our tools, it stops guessing</li>
+        <li>POS landing page: Granola, Jira, Confluence, GitHub</li>
+      </ul>
       <a class="srclink reveal" href="https://x.com/emmettshine/status/2054539694097015171" target="_blank" rel="noopener">Read: The HTML Brand<span class="ext">&#8599;</span></a>
     </div>
   </section>
@@ -227,6 +294,11 @@
       <div class="bignum reveal">04</div>
       <div class="eyebrow reveal">04 // Skills</div>
       <h2 class="reveal">Do it once. Never<br>explain it again.</h2>
+      <ul class="cues reveal">
+        <li>Do it once, reuse it forever</li>
+        <li>My SEO review now runs without me</li>
+        <li>Any team, on demand</li>
+      </ul>
       <a class="srclink reveal" href="https://hub.convious.com/marketing-content/seo-review-overview.html" target="_blank" rel="noopener">See: my SEO review<span class="ext">&#8599;</span></a>
     </div>
   </section>
@@ -236,6 +308,10 @@
       <div class="bignum reveal">05</div>
       <div class="eyebrow reveal">05 // Looping agents</div>
       <h2 class="reveal">You stop asking.<br>You write the loop.</h2>
+      <ul class="cues reveal">
+        <li>The loop runs and checks itself</li>
+        <li>You write the loop, not the prompt</li>
+      </ul>
       <p class="quote reveal"><span class="mk">&ldquo;</span>My job is to write loops.<span class="mk">&rdquo;</span></p>
       <p class="attr reveal">Boris Cherny, creator of Claude Code</p>
     </div>
@@ -246,6 +322,10 @@
       <div class="bignum reveal">05</div>
       <div class="eyebrow reveal">// This month</div>
       <h2 class="reveal">This is happening<br>right now.</h2>
+      <ul class="cues reveal">
+        <li>One idea everywhere this June: write loops, not prompts</li>
+        <li>Boris has not opened his editor since November</li>
+      </ul>
       <p class="small reveal" style="margin-top:1.3rem">259 changes in 30 days. All written by Claude Code.</p>
       <p class="quote reveal" style="font-size:clamp(1.2rem,2.4vw,2rem)"><span class="mk">&ldquo;</span>You should be designing loops that prompt your agents.<span class="mk">&rdquo;</span></p>
       <p class="attr reveal">Peter Steinberger, June 2026, 2.2 million views</p>
@@ -256,6 +336,10 @@
     <div class="chap-text">
       <div class="eyebrow reveal">// The pattern</div>
       <h2 class="reveal">We have done<br>this before.</h2>
+      <ul class="cues reveal">
+        <li>We industrialised before</li>
+        <li>From doing the work to directing it</li>
+      </ul>
       <a class="srclink reveal" href="https://x.com/businessbarista/status/2061573150719021542" target="_blank" rel="noopener">Read: The Software Factory<span class="ext">&#8599;</span></a>
     </div>
   </section>
@@ -263,12 +347,21 @@
   <section class="slide" data-ch="-1" data-note="Light and informational. Not magic, not nothing. The boring part is the real part.">
     <div class="eyebrow reveal">// Reality check</div>
     <h2 class="reveal">Not all of it<br>is magic.</h2>
+    <ul class="cues reveal">
+      <li>Some of it genuinely new</li>
+      <li>Some just a confident script with a big bill</li>
+      <li>The real work: the limits and checks</li>
+    </ul>
   </section>
 
   <section class="slide" data-ch="-1" data-note="The bill is real. Uber spent a year's budget in 4 months, set a 1500 limit per tool. Gartner: only 17 percent actually run agents.">
     <div class="eyebrow reveal">// The receipts</div>
     <h2 class="reveal">And the bill<br>is real.</h2>
-    <p class="body reveal" style="margin-top:1.4rem;max-width:42ch">Uber: a year's AI budget gone in four months. Now capped at 1,500 dollars per person, per tool. Gartner: 17 percent actually run agents.</p>
+    <ul class="cues reveal">
+      <li>Uber: a year's AI budget gone in four months</li>
+      <li>Now capped at 1,500 dollars per person, per tool</li>
+      <li>Gartner: only 17 percent actually run agents</li>
+    </ul>
   </section>
 
   <section class="slide" data-ch="-1" data-note="Trajectory. Verify line. Human note. Slow here.">
@@ -284,6 +377,10 @@
       <div class="bignum reveal">06</div>
       <div class="eyebrow reveal">06 // MCP</div>
       <h2 class="reveal">One port.<br>Many cables.</h2>
+      <ul class="cues reveal">
+        <li>One shared door any AI plugs into</li>
+        <li>Build it once, everyone uses it</li>
+      </ul>
       <p class="small reveal">An open standard. OpenAI, Google and Microsoft all use it.</p>
     </div>
   </section>
@@ -293,6 +390,11 @@
       <div class="bignum reveal">06</div>
       <div class="eyebrow reveal">06 // MCP, for us</div>
       <h2 class="reveal">Ask our data<br>a question.</h2>
+      <ul class="cues reveal">
+        <li>Reach our Snowflake data from any AI</li>
+        <li>No code, no dashboard wait</li>
+        <li>Anyone, any team, plain language</li>
+      </ul>
     </div>
   </section>
 
@@ -301,9 +403,25 @@
       <div class="bignum reveal">06</div>
       <div class="eyebrow reveal">06 // MCP, outward</div>
       <h2 class="reveal">The same door<br>opens to partners.</h2>
+      <ul class="cues reveal">
+        <li>Partners plug into Convious</li>
+        <li>We become the layer, not just the app</li>
+      </ul>
       <p class="small reveal">In a market full of separate tools, whoever owns the connection owns the market.</p>
       <a class="srclink reveal" href="https://x.com/satyanadella/status/2066182223213293753" target="_blank" rel="noopener">Read: Nadella, a frontier needs an ecosystem<span class="ext">&#8599;</span></a>
     </div>
+  </section>
+
+  <section class="slide" data-ch="-1" data-note="The actionable close, the ask. A few things I would change here at Convious using all of this. Land each one with a concrete example.">
+    <div class="eyebrow reveal">// What I'd change here</div>
+    <h2 class="reveal">So, what we<br>do with this.</h2>
+    <ul class="cues lead reveal">
+      <li>Put the tools in everyone's hands, on our real data and code</li>
+      <li>Write down what we repeat, as skills the whole team reuses</li>
+      <li>Build one MCP doorway into our tools, so every team plugs in</li>
+      <li>Let loops handle the repeatable work, with limits and checks</li>
+      <li>Then open that doorway to our partners</li>
+    </ul>
   </section>
 
   <section class="slide" data-ch="-1" data-note="Final line. Slow. Then thanks.">
@@ -435,6 +553,68 @@ minis.forEach(m=>{
   m._shader = makeShader(el, shape, palFor(shape, 'up'));
 });
 
+/* ---- chapter sneak-peek orbs (fly in -> converge -> morph into the rail) ---- */
+const orbs = Array.from(document.querySelectorAll('.orb'));
+const ORB_BASE = 140;                 // matches the .orb px box; we scale from here
+const ORB_BEZ = [                     // each orb takes a different curve in
+  'cubic-bezier(.16,1.18,.30,1)','cubic-bezier(.34,1.56,.64,1)','cubic-bezier(.22,1.0,.36,1)',
+  'cubic-bezier(.5,1.42,.40,1)','cubic-bezier(.18,.9,.30,1.12)','cubic-bezier(.30,1.3,.50,1)'
+];
+orbs.forEach(o=>{
+  const shape = parseInt(o.dataset.shape,10);
+  o._shape = shape;
+  o.classList.toggle('mcp', shape===MCP_SHAPE);
+  o._shader = makeShader(o.querySelector('.orbsq'), shape, palFor(shape,'on'));
+});
+let orbPhase = 'hidden';
+const placeOrb = (o,cx,cy,s)=>{ o.style.transform = `translate(${cx-ORB_BASE/2}px, ${cy-ORB_BASE/2}px) scale(${s})`; };
+function orbCorner(j){
+  const vw=innerWidth, vh=innerHeight, m=ORB_BASE*1.5;
+  return [[-m,-m],[vw+m,-m],[-m,vh+m],[vw+m,vh+m],[vw*0.5,-m*1.5],[vw*0.5,vh+m*1.5]][j];
+}
+function orbRow(cy,D){
+  const vw=innerWidth, gap=D*0.55, total=orbs.length*D+(orbs.length-1)*gap, x0=(vw-total)/2;
+  return orbs.map((_,j)=>[x0 + j*(D+gap) + D/2, cy]);
+}
+function orbTrans(dur,varied,stagger){
+  orbs.forEach((o,j)=>{
+    const d = stagger ? j*stagger : 0;
+    o.style.transition = `transform ${dur}s ${varied?ORB_BEZ[j]:'cubic-bezier(.4,0,.1,1)'} ${d}s, opacity .6s ease ${d}s`;
+  });
+}
+function orbReset(){ orbs.forEach(o=>{ o.querySelector('.orbsq').style.borderRadius='50%'; }); document.body.classList.remove('orbs-railing'); }
+function orbsHide(animate){
+  orbPhase='hidden'; orbReset();
+  orbs.forEach((o,j)=>{ if(!animate) o.style.transition='none'; const [cx,cy]=orbCorner(j); placeOrb(o,cx,cy,0.4); o.style.opacity='0'; });
+}
+function orbsConverge(){               // corners -> dead-centre hero, ~3s, varied curves, staggered
+  orbPhase='center'; orbReset();
+  const D=Math.max(86,Math.min(154,innerWidth*0.11)), tg=orbRow(innerHeight*0.50,D);
+  orbs.forEach((o,j)=>{ o.style.transition='none'; const [sx,sy]=orbCorner(j); placeOrb(o,sx,sy,0.4); o.style.opacity='0'; });
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    orbTrans(2.6,true,0.09);
+    orbs.forEach((o,j)=>{ o.style.opacity='1'; placeOrb(o,tg[j][0],tg[j][1],D/ORB_BASE); });
+  }));
+}
+function orbsRise(animate){            // settle into a lower-centre shelf so the title fits above
+  orbPhase='risen'; orbReset();
+  const D=Math.max(66,Math.min(104,innerWidth*0.078)), tg=orbRow(innerHeight*0.68,D);
+  orbTrans(animate?0.9:0,false,0);
+  orbs.forEach((o,j)=>{ o.style.opacity='1'; placeOrb(o,tg[j][0],tg[j][1],D/ORB_BASE); });
+}
+function orbsToRail(){                 // morph onto the exact rail positions, then hand off to the real rail
+  orbPhase='rail';
+  document.body.classList.add('orbs-railing');
+  orbTrans(0.85,false,0);
+  minis.forEach((m,j)=>{
+    const r=m.querySelector('.sq').getBoundingClientRect();
+    orbs[j].querySelector('.orbsq').style.borderRadius=(r.width*0.2)+'px';
+    placeOrb(orbs[j], r.left+r.width/2, r.top+r.height/2, r.width/ORB_BASE);
+  });
+  document.body.classList.remove('rail-hidden');          // real rail fades up underneath
+  setTimeout(()=>{ orbs.forEach(o=>{ o.style.transition='opacity .4s ease'; o.style.opacity='0'; }); orbPhase='hidden'; }, 880);
+}
+
 /* ---- build big card layers ---- */
 const layers = [
   {el: document.getElementById('bigA'), shader:null},
@@ -507,6 +687,7 @@ function paintBig(){
 }
 
 function show(idx){
+  const from = i;
   i = Math.max(0, Math.min(n-1, idx));
   document.body.classList.toggle('intro', !!slides[i].dataset.intro);
   slides.forEach((s,k)=>s.classList.toggle('active', k===i));
@@ -539,7 +720,48 @@ function show(idx){
   } else {
     document.body.classList.remove('show-art');
   }
+
+  // Text-only slides (no art card, no factory image, not the intro) centre
+  // themselves; the crossfade between slides carries the move to/from the side.
+  slides[i].classList.toggle('centered', !shapeAttr && !isFactory && !slides[i].dataset.intro);
+
+  manageOrbs(from, i);
 }
+
+// The chapter orbs: born on the dim into the title slide, morphed into the rail
+// on the map slide. TITLE is the title card, MAP the "six steps" overview.
+const TITLE = 1, MAP = 2;
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let orbRiseTimer = null;
+function manageOrbs(from, to){
+  clearTimeout(orbRiseTimer);
+  if(reduceMotion){ document.body.classList.remove('rail-hidden','orbs-railing'); slides[TITLE].classList.remove('holding'); return; }
+  if(to === 0){                                   // intro: rail + orbs put away
+    document.body.classList.add('rail-hidden'); slides[TITLE].classList.remove('holding'); orbsHide(false); return;
+  }
+  if(to === TITLE){
+    document.body.classList.add('rail-hidden');
+    if(from === 0){                               // forward off the cold open: full reveal
+      slides[TITLE].classList.add('holding');
+      orbsConverge();
+      orbRiseTimer = setTimeout(()=>{ orbsRise(true); slides[TITLE].classList.remove('holding'); }, 3200);
+    } else {                                       // back from the map: drop the band back down
+      slides[TITLE].classList.remove('holding'); orbsRise(true);
+    }
+    return;
+  }
+  slides[TITLE].classList.remove('holding');
+  if(to === MAP && from === TITLE){ orbsToRail(); return; }   // the morph
+  document.body.classList.remove('rail-hidden');               // anywhere else: plain rail
+  if(orbPhase !== 'hidden') orbsHide(false);
+}
+
+// Keep the orb band aligned if the window is resized mid-flight.
+addEventListener('resize', ()=>{
+  if(orbPhase==='center'){ const D=Math.max(86,Math.min(154,innerWidth*0.11)), t=orbRow(innerHeight*0.50,D); orbs.forEach((o,j)=>placeOrb(o,t[j][0],t[j][1],D/ORB_BASE)); }
+  else if(orbPhase==='risen'){ orbsRise(false); }
+});
+
 // House-lights dim: fade through black when crossing into/out of the light intro
 const veil = document.getElementById('veil');
 const isIntro = idx => !!(slides[idx] && slides[idx].dataset.intro);
