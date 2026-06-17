@@ -317,7 +317,14 @@ function makeShader(el, shape, pal){
       u_colorFront: pal.front,
       u_shape: shape,
       u_type: (SH.DitheringTypes && SH.DitheringTypes['4x4']) || 3,
-      u_pxSize: 2.5
+      u_pxSize: 2.5,
+      // Sizing uniforms: vanilla ShaderMount does NOT inject these (the React
+      // wrapper does), so without them u_scale defaults to 0 and the pattern
+      // collapses to a flat color. These mirror the library's defaultPatternSizing.
+      u_fit: 0, u_scale: 1, u_rotation: 0,
+      u_offsetX: 0, u_offsetY: 0,
+      u_originX: 0.5, u_originY: 0.5,
+      u_worldWidth: 0, u_worldHeight: 0
     });
     if(typeof sh.setSpeed === 'function') sh.setSpeed(pal.speed);
     return sh;
