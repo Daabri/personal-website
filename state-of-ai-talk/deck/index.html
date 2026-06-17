@@ -88,12 +88,10 @@
   #veil{position:fixed;inset:0;z-index:60;background:#0c0a0f;opacity:0;pointer-events:none;transition:opacity 1.25s ease}
   body.intro{background:#f1ede5;color:#211c28}
   body.intro .bg-shapes,body.intro .grain,body.intro .scrim,body.intro .rail,body.intro #bigCard,body.intro #factoryCard,body.intro .chrome,body.intro .meta,body.intro .hint{display:none!important}
-  body.intro .slide{align-items:flex-start}
-  .intro-wrap{max-width:62rem}
-  .intro-h{font-family:"Raleway",sans-serif;font-weight:800;font-size:clamp(2.2rem,5.2vw,4.6rem);line-height:1.02;letter-spacing:-.02em;margin-top:.5rem;color:#211c28}
-  .intro-shot{display:block;width:min(46rem,84vw);max-width:100%;margin:1.9rem 0;border-radius:14px;box-shadow:0 26px 64px -30px rgba(0,0,0,.45)}
-  .intro-p{font-family:"Inter",sans-serif;font-weight:500;font-size:clamp(1.05rem,1.7vw,1.5rem);line-height:1.55;max-width:44ch;color:#4a4452}
-  .intro-cue{margin-top:1.5rem;font-family:"JetBrains Mono",monospace;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--coral)}
+  body.intro .slide{align-items:center;justify-content:center;text-align:center}
+  .intro-wrap{max-width:100%}
+  .intro-shot{display:block;width:min(58rem,88vw);max-width:100%;margin:0 auto;border-radius:16px;box-shadow:0 30px 80px -32px rgba(0,0,0,.5)}
+  .intro-cue{position:fixed;bottom:1.6rem;left:0;right:0;text-align:center;font-family:"JetBrains Mono",monospace;font-size:1.1rem;color:var(--coral);opacity:.5}
 
   .say{border-left:4px solid var(--coral);padding:.2rem 0 .2rem 1.5rem;margin-top:1.6rem;font-family:"Raleway",sans-serif;font-weight:800;font-size:clamp(1.5rem,3.2vw,2.8rem);line-height:1.12;letter-spacing:-.01em;max-width:26ch}
   .say em{font-style:normal;color:var(--coral)}
@@ -170,14 +168,11 @@
 
 <div class="deck" id="deck">
 
-  <section class="slide" data-intro="1" data-ch="-1" data-note="Cold open, lights up. The joke: I asked Claude to read my bookmarks. Press right to dim the lights into the talk.">
+  <section class="slide" data-intro="1" data-ch="-1" data-note="Cold open, just the screenshot. Say it out loud: I needed to present on AI, so I asked Claude to read the X bookmarks I never actually read myself. That is the whole prep. Then press right to dim the lights.">
     <div class="intro-wrap">
-      <div class="eyebrow reveal">First, a confession</div>
-      <h2 class="intro-h reveal">I asked Claude to<br>make this talk.</h2>
       <img class="intro-shot reveal" src="claude-prompt.png" alt="My message to Claude: connect to my twitter and read my bookmarks">
-      <p class="intro-p reveal">That was the prep. I bookmark clever things on X and never read them, so I asked Claude to read them for me. Everything after this is what it found.</p>
-      <div class="intro-cue reveal">Let me dim the lights &rarr;</div>
     </div>
+    <div class="intro-cue reveal">&rarr;</div>
   </section>
 
   <section class="slide" data-ch="-1" data-note="Keys: arrows or space to move. N notes. F fullscreen. L light/dark. ? help.">
