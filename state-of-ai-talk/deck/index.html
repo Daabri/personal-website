@@ -34,9 +34,13 @@
   body.light .scrim{background:radial-gradient(140% 110% at 50% 46%, rgba(243,239,233,.04), rgba(243,239,233,.34))}
 
   /* persistent big artifact card (two layers for morph crossfade) */
-  #bigCard{position:fixed;right:7vw;top:50%;transform:translateY(-50%);width:min(31vw,400px);height:min(41vw,533px);z-index:5;
+  /* Landscape, half-screen-width centerpiece on desktop. */
+  #bigCard{position:fixed;right:5vw;top:50%;transform:translateY(-50%);width:min(50vw,920px);aspect-ratio:3/2;z-index:5;
     border:1px solid rgba(255,21,91,.45);border-radius:18px;overflow:hidden;
-    box-shadow:0 30px 90px -45px rgba(255,21,91,.55);opacity:0;transition:opacity .6s ease;pointer-events:none}
+    box-shadow:0 36px 110px -50px rgba(255,21,91,.6);opacity:0;transition:opacity .6s ease,border-color .85s ease,box-shadow .85s ease;pointer-events:none}
+  /* MCP is the destination: render it in the brand's opposite (teal) so it pops. */
+  #bigCard.mcp{border-color:rgba(0,230,160,.55);box-shadow:0 36px 110px -50px rgba(0,230,160,.6)}
+  #bigCard.mcp .anum{color:#00e6a0}
   body.show-art #bigCard{opacity:1}
   #bigA,#bigB{position:absolute;inset:0;transition:opacity .85s ease;
     background:linear-gradient(135deg, rgba(255,21,91,.18), rgba(30,26,36,.35) 45%, rgba(255,21,91,.4));background-size:220% 220%;animation:artpulse 7s ease infinite}
@@ -49,7 +53,7 @@
   .deck{position:relative;z-index:6;height:100vh;width:100vw}
   .slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:var(--pad);opacity:0;visibility:hidden;pointer-events:none}
   .slide.active{opacity:1;visibility:visible;pointer-events:auto}
-  .slide.has-art{padding-right:42vw}
+  .slide.has-art{padding-right:58vw}
   @media (max-width:900px){.slide.has-art{padding-right:var(--pad)}}
   .reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
   .slide.active .reveal{opacity:1;transform:none}
@@ -308,6 +312,16 @@ const PAL = {
 };
 let theme = 'dark';
 
+/* MCP (shape 7) is the destination: render its ACTIVE artifact in the brand's
+   opposite (teal #00e6a0) so it pops against the otherwise all-coral timeline. */
+const MCP_SHAPE = 7;
+const MCP_FRONT = { dark:[0,0.902,0.627,1], light:[0,0.62,0.42,1] };
+function palFor(shape, state){
+  const base = PAL[theme][state];
+  if(shape === MCP_SHAPE && state === 'on') return { ...base, front: MCP_FRONT[theme] };
+  return base;
+}
+
 /* ---- shader helpers ---- */
 function makeShader(el, shape, pal){
   if(!SH || !FRAG) return null;
@@ -351,7 +365,7 @@ minis.forEach(m=>{
   const el = m.querySelector('.sq');
   const shape = parseInt(m.dataset.shape,10);
   m._shape = shape;
-  m._shader = makeShader(el, shape, PAL[theme].up);
+  m._shader = makeShader(el, shape, palFor(shape, 'up'));
 });
 
 /* ---- build big card layers ---- */
@@ -359,11 +373,12 @@ const layers = [
   {el: document.getElementById('bigA'), shader:null},
   {el: document.getElementById('bigB'), shader:null}
 ];
-layers[0].shader = makeShader(layers[0].el, 4, PAL[theme].on);
-layers[1].shader = makeShader(layers[1].el, 2, PAL[theme].on);
+layers[0].shader = makeShader(layers[0].el, 4, palFor(4, 'on'));
+layers[1].shader = makeShader(layers[1].el, 2, palFor(2, 'on'));
 layers[0].el.style.opacity = 1;
 layers[1].el.style.opacity = 0;
 let bigShape = 4, bigVisible = 0;
+const bigCard = document.getElementById('bigCard');
 const anum = document.querySelector('#bigCard .anum');
 const alabel = document.querySelector('#bigCard .alabel');
 
@@ -384,13 +399,13 @@ function paintRail(){
     let state = (j===activeCh) ? 'on' : (j<=maxSeen ? 'done' : 'up');
     m.classList.toggle('on', state==='on');
     m.classList.toggle('done', state==='done');
-    tune(m._shader, m._shape, PAL[theme][state]);
+    tune(m._shader, m._shape, palFor(m._shape, state));
   });
 }
 function paintBig(){
-  // keep the visible big layer colored for current theme
-  tune(layers[bigVisible].shader, bigShape, PAL[theme].on);
-  tune(layers[1-bigVisible].shader, undefined, PAL[theme].on);
+  // keep the visible big layer colored for current theme (MCP stays teal)
+  tune(layers[bigVisible].shader, bigShape, palFor(bigShape, 'on'));
+  tune(layers[1-bigVisible].shader, undefined, palFor(bigShape, 'on'));
 }
 
 function show(idx){
@@ -410,14 +425,15 @@ function show(idx){
     anum.textContent = slides[i].dataset.artnum || '';
     alabel.textContent = slides[i].dataset.artlabel || '';
     const sh = parseInt(shapeAttr,10);
+    bigCard.classList.toggle('mcp', sh === MCP_SHAPE);
     if(sh !== bigShape){
       const inc = 1 - bigVisible;
-      tune(layers[inc].shader, sh, PAL[theme].on);
+      tune(layers[inc].shader, sh, palFor(sh, 'on'));
       layers[inc].el.style.opacity = 1;
       layers[bigVisible].el.style.opacity = 0;
       bigVisible = inc; bigShape = sh;
     } else {
-      tune(layers[bigVisible].shader, sh, PAL[theme].on);
+      tune(layers[bigVisible].shader, sh, palFor(sh, 'on'));
     }
   } else {
     document.body.classList.remove('show-art');

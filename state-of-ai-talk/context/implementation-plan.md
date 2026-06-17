@@ -92,10 +92,16 @@ Interludes (not chapters, rail shows no active artifact):
 - Persistent chapter rail (top center): all six artifacts always visible as the reference point.
   Active = coral + larger + faster; done = dim coral + slow; upcoming = grey + slow.
   Deliberately NOT a full-height pillar.
-- Big editorial card (right, ~3:4) shows the current chapter's artifact and MORPHS on chapter
+- Big editorial card (right) shows the current chapter's artifact and MORPHS on chapter
   change via a two-layer opacity crossfade (incoming layer switches shape, fades over outgoing).
   The three MCP slides share sphere, so it holds steady there.
-- Aspect ratios for artifact holders: 1:1 (minis), 3:4 (big card). 1:2 max.
+- Aspect ratios for artifact holders: 1:1 (minis). Big card is LANDSCAPE 3:2, width min(50vw,920px)
+  (~half the screen) so the artifact reads from the back of a room; has-art slides use
+  padding-right:58vw to keep headline/body clear of it. (Was 3:4 portrait at 31vw.)
+- COLOR: all chapters render coral (#ff155b). EXCEPTION: MCP (shape 7, the destination) renders
+  in the brand's OPPOSITE, teal #00e6a0 — active artifact front color, big-card border + glow,
+  the "06" anum, and the MCP rail tile when active. Implemented via palFor(shape,state) which
+  swaps the front color for shape 7 in the 'on' state, plus a `.mcp` class on #bigCard.
 
 ## Paper shaders — vanilla API (confirmed from official docs)
     import { ShaderMount, ditheringFragmentShader, DitheringShapes, DitheringTypes }
